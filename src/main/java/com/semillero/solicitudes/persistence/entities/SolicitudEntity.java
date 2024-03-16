@@ -3,11 +3,11 @@ package com.semillero.solicitudes.persistence.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "SOLICITUD")
+@Table(name = "solicitud_vaciones")
 public class SolicitudEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "nm_id_solicitud")
     private int id;
 
     @Basic(optional = false)
