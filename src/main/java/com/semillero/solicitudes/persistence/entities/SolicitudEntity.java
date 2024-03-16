@@ -2,6 +2,8 @@ package com.semillero.solicitudes.persistence.entities;
 
 import jakarta.persistence.*;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "solicitud_vaciones")
 public class SolicitudEntity {
@@ -11,12 +13,38 @@ public class SolicitudEntity {
     private int id;
 
     @Basic(optional = false)
-    @Column(name = "NAME")
-    private String name;
+    @Column(name = "nm_id_usuario")
+    @ManyToOne
+    @JoinColumn(name = "nm_id_usuario")
+    private UsuarioEntity usuario;
 
     @Basic(optional = false)
-    @Column(name = "DESCRIPTION")
-    private String description;
+    @Column(name = "nm_dias_solicita")
+    private int diasSolicitados;
+
+    @Basic(optional = false)
+    @Column(name = "fe_fecha_inicio")
+    private Date fechaInicio;
+
+    @Basic(optional = false)
+    @Column(name = "fe_fecha_fin")
+    private Date fechaFin;
+
+    @Basic(optional = false)
+    @Column(name = "fe_fecha_retorna")
+    private Date fechaRetorno;
+
+    @Basic(optional = false)
+    @Column(name = "ds_estado")
+    private String estado;
+
+    @Basic(optional = false)
+    @Column(name = "ds_observaciones")
+    private String observaciones;
+
+    @Basic(optional = false)
+    @Column(name = "fe_fecha_creacion")
+    private Date fechaCreacion;
 
     public int getId() {
         return id;
@@ -26,19 +54,67 @@ public class SolicitudEntity {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public UsuarioEntity getUsuario() {
+        return usuario;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsuario(UsuarioEntity usuario) {
+        this.usuario = usuario;
     }
 
-    public String getDescription() {
-        return description;
+    public int getDiasSolicitados() {
+        return diasSolicitados;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDiasSolicitados(int diasSolicitados) {
+        this.diasSolicitados = diasSolicitados;
+    }
+
+    public Date getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public Date getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public Date getFechaRetorno() {
+        return fechaRetorno;
+    }
+
+    public void setFechaRetorno(Date fechaRetorno) {
+        this.fechaRetorno = fechaRetorno;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getObservaciones() {
+        return observaciones;
+    }
+
+    public void setObservaciones(String observaciones) {
+        this.observaciones = observaciones;
+    }
+
+    public Date getFechaCreacion() {
+        return fechaCreacion;
+    }
+
+    public void setFechaCreacion(Date fechaCreacion) {
+        this.fechaCreacion = fechaCreacion;
     }
 }
