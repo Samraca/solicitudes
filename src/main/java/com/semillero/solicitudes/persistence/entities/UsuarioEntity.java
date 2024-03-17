@@ -14,7 +14,6 @@ public class UsuarioEntity {
     private int id;
 
     @Basic(optional = false)
-    @Column(name = "nm_id_empleado")
     @ManyToOne
     @JoinColumn(name = "nm_id_empleado")
     private EmpleadoEntity idEmpleado;
@@ -36,7 +35,6 @@ public class UsuarioEntity {
     private String password;
 
     @Basic(optional = false)
-    @Column(name = "nm_id_rol")
     @ManyToOne
     @JoinColumn(name = "nm_id_rol")
     private RolEntity rol;

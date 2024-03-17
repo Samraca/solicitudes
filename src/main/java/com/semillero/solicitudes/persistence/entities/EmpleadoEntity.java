@@ -54,13 +54,11 @@ public class EmpleadoEntity {
     private String estado;
 
     @Basic(optional = true)
-    @Column(name = "nm_supervisor_inmediato")
     @ManyToOne
     @JoinColumn(name = "nm_supervisor_inmediato")
     private EmpleadoEntity supervisor;
 
     @Basic(optional = false)
-    @Column(name = "nm_cargo")
     @ManyToOne
     @JoinColumn(name = "nm_id_cargo")
     private CargosEntity cargo;

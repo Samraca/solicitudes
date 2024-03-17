@@ -13,7 +13,6 @@ public class SolicitudEntity {
     private int id;
 
     @Basic(optional = false)
-    @Column(name = "nm_id_usuario")
     @ManyToOne
     @JoinColumn(name = "nm_id_usuario")
     private UsuarioEntity usuario;
