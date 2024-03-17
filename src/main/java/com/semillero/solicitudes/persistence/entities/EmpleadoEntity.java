@@ -65,6 +65,8 @@ public class EmpleadoEntity {
     @JoinColumn(name = "nm_id_cargo")
     private CargosEntity cargo;
 
+    public EmpleadoEntity() {
+    }
     public int getId() {
         return id;
     }

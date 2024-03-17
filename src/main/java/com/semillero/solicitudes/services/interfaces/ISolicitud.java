@@ -6,4 +6,10 @@ import java.util.List;
 
 public interface ISolicitud {
     List<SolicitudEntity> getAll();
+    SolicitudEntity getSolicitudById(Integer id);
+    SolicitudEntity createSolicitud(SolicitudEntity solicitud);
+    SolicitudEntity updateSolicitud(SolicitudEntity solicitud);
+    void deleteSolicitud(Integer id);
+
+
 }

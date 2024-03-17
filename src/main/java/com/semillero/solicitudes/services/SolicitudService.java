@@ -21,4 +21,24 @@ public class SolicitudService implements ISolicitud {
     public List<SolicitudEntity> getAll() {
         return solicitudRepository.findAll();
     }
+
+    @Override
+    public SolicitudEntity getSolicitudById(Integer id) {
+        return solicitudRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public SolicitudEntity createSolicitud(SolicitudEntity solicitud) {
+        return solicitudRepository.save(solicitud);
+    }
+
+    @Override
+    public SolicitudEntity updateSolicitud(SolicitudEntity solicitud) {
+        return solicitudRepository.save(solicitud);
+    }
+
+    @Override
+    public void deleteSolicitud(Integer id) {
+        solicitudRepository.deleteById(id);
+    }
 }

@@ -41,6 +41,8 @@ public class UsuarioEntity {
     @JoinColumn(name = "nm_id_rol")
     private RolEntity rol;
 
+    public UsuarioEntity() {
+    }
     public int getId() {
         return id;
     }

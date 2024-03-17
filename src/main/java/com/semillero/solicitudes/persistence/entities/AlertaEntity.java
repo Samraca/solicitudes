@@ -32,6 +32,8 @@ public class AlertaEntity {
     @Column(name = "fe_fecha_creacion")
     private Date fecha;
 
+    public AlertaEntity() {
+    }
     public int getId() {
         return id;
     }

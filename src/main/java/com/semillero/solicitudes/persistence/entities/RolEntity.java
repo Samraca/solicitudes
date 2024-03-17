@@ -21,6 +21,8 @@ public class RolEntity {
     @Column(name = "fe_fecha_creacion")
     private Date fechaCreacion;
 
+    public RolEntity() {
+    }
     public int getId() {
         return id;
     }

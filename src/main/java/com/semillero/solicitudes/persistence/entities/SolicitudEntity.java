@@ -46,6 +46,8 @@ public class SolicitudEntity {
     @Column(name = "fe_fecha_creacion")
     private Date fechaCreacion;
 
+    public SolicitudEntity() {
+    }
     public int getId() {
         return id;
     }

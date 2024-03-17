@@ -28,6 +28,8 @@ public class CargosEntity {
     @Column(name = "ds_activo")
     private String activo;
 
+    public CargosEntity() {
+    }
     public int getId() {
         return id;
     }
