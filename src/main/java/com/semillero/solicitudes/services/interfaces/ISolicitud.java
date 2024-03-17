@@ -5,7 +5,7 @@ import com.semillero.solicitudes.persistence.entities.SolicitudEntity;
 import java.util.List;
 
 public interface ISolicitud {
-    List<SolicitudEntity> getAll();
+    List<SolicitudEntity> getAllSolicitudes();
     SolicitudEntity getSolicitudById(Integer id);
     SolicitudEntity createSolicitud(SolicitudEntity solicitud);
     SolicitudEntity updateSolicitud(SolicitudEntity solicitud);

@@ -18,7 +18,7 @@ public class SolicitudService implements ISolicitud {
     }
 
     @Override
-    public List<SolicitudEntity> getAll() {
+    public List<SolicitudEntity> getAllSolicitudes() {
         return solicitudRepository.findAll();
     }
 
