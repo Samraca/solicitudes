@@ -36,7 +36,7 @@ public class UsuarioEntity {
 
     @Basic(optional = false)
     @ManyToOne
-    @JoinColumn(name = "nm_id_rol")
+    @JoinColumn(name = "nm_rol")
     private RolEntity rol;
 
     public UsuarioEntity() {

@@ -60,7 +60,7 @@ public class EmpleadoEntity {
 
     @Basic(optional = false)
     @ManyToOne
-    @JoinColumn(name = "nm_id_cargo")
+    @JoinColumn(name = "nm_cargo")
     private CargosEntity cargo;
 
     public EmpleadoEntity() {
