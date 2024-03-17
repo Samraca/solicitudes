@@ -16,7 +16,7 @@ public class UsuarioEntity {
     @Basic(optional = false)
     @ManyToOne
     @JoinColumn(name = "nm_id_empleado")
-    private EmpleadoEntity idEmpleado;
+    private EmpleadoEntity empleado;
 
     @Basic(optional = false)
     @Column(name = "ds_usaurio")
@@ -49,12 +49,12 @@ public class UsuarioEntity {
         this.id = id;
     }
 
-    public EmpleadoEntity getIdEmpleado() {
-        return idEmpleado;
+    public EmpleadoEntity getEmpleado() {
+        return empleado;
     }
 
-    public void setIdEmpleado(EmpleadoEntity idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setEmpleado(EmpleadoEntity empleado) {
+        this.empleado = empleado;
     }
 
     public String getUsername() {

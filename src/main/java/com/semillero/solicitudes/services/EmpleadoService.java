@@ -42,4 +42,8 @@ public class EmpleadoService implements IEmpleado {
         empleadosRepository.deleteById(id);
     }
 
+
+    public EmpleadoEntity findByDocumento(int documento) {
+        return empleadosRepository.findByDocumento(documento);
+    }
 }

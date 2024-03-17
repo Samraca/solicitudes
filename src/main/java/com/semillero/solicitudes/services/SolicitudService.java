@@ -1,19 +1,27 @@
 package com.semillero.solicitudes.services;
 
 import com.semillero.solicitudes.persistence.SolicitudRepository;
+import com.semillero.solicitudes.persistence.entities.EmpleadoEntity;
 import com.semillero.solicitudes.persistence.entities.SolicitudEntity;
+import com.semillero.solicitudes.persistence.entities.UsuarioEntity;
 import com.semillero.solicitudes.services.interfaces.ISolicitud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+
 
 @Service
 public class SolicitudService implements ISolicitud {
     SolicitudRepository solicitudRepository;
 
     @Autowired
-    public SolicitudService (SolicitudRepository solicitudRepository) {
+    public SolicitudService(SolicitudRepository solicitudRepository) {
         this.solicitudRepository = solicitudRepository;
     }
 
@@ -28,8 +36,9 @@ public class SolicitudService implements ISolicitud {
     }
 
     @Override
-    public SolicitudEntity createSolicitud(SolicitudEntity solicitud) {
-        return solicitudRepository.save(solicitud);
+    public Boolean createSolicitud(SolicitudEntity solicitud) {
+        SolicitudEntity solicitudCompleta = getSolicitudById(solicitud.getId());
+        return aprobarSolicitud(solicitudCompleta);
     }
 
     @Override
@@ -40,5 +49,46 @@ public class SolicitudService implements ISolicitud {
     @Override
     public void deleteSolicitud(Integer id) {
         solicitudRepository.deleteById(id);
+    }
+
+    public Optional<List<SolicitudEntity>> getSolicitudesByEmpleadoId(Integer empleadoId) {
+        UsuarioEntity usuario = usuarioService.getUsuarioByEmpleadoId(empleadoId);
+        List<SolicitudEntity> solicitudes = solicitudRepository.findByUsuarioOrderByFechaCreacionDesc(usuario);
+        return Optional.ofNullable(solicitudes.isEmpty() ? null : solicitudes);
+    }
+
+    @Autowired
+    private UsuarioService usuarioService;
+
+    public boolean aprobarSolicitud(SolicitudEntity solicitud) {
+        UsuarioEntity usuario = usuarioService.getUsuarioById(solicitud.getId());
+        EmpleadoEntity empleado = usuario.getEmpleado();
+        String tipoContrato = empleado.getTipoContrato();
+
+        Date fechaIngreso = empleado.getFechaIngreso();
+        LocalDate fechaIngresoLocalDate = fechaIngreso.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int diasTrabajados = calcularDiasHabiles(fechaIngresoLocalDate, LocalDate.now());
+        double anosTrabajados = (double) diasTrabajados / 365;
+        int diasVacaciones = (int) Math.round(anosTrabajados * 15);
+        int diasAnticipacion = calcularDiasHabiles(LocalDate.now(), solicitud.getFechaInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+
+        return !tipoContrato.equals("prestacion de servicios")
+        && solicitud.getDiasSolicitados() <= diasVacaciones
+        && diasAnticipacion >= 15 && diasTrabajados >= 60;
+    }
+
+    public int calcularDiasHabiles(LocalDate fechaInicio, LocalDate fechaFin) {
+        int diasHabiles = 0;
+        while (fechaInicio.isBefore(fechaFin) || fechaInicio.isEqual(fechaFin)) {
+            switch (fechaInicio.getDayOfWeek()) {
+                case SATURDAY:
+                case SUNDAY:
+                    break;
+                default:
+                    diasHabiles++;
+            }
+            fechaInicio = fechaInicio.plusDays(1);
+        }
+        return diasHabiles;
     }
 }
