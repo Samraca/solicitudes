@@ -1,6 +1,7 @@
 package com.semillero.solicitudes.services;
 
 import com.semillero.solicitudes.persistence.EmpleadosRepository;
+import com.semillero.solicitudes.persistence.entities.CargosEntity;
 import com.semillero.solicitudes.persistence.entities.EmpleadoEntity;
 import com.semillero.solicitudes.services.interfaces.IEmpleado;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,6 @@ public class EmpleadoService implements IEmpleado {
     public void deleteEmpleado(Integer id) {
         empleadosRepository.deleteById(id);
     }
-
 
     public EmpleadoEntity findByDocumento(int documento) {
         return empleadosRepository.findByDocumento(documento);

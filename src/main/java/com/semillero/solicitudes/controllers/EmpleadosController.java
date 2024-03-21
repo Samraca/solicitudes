@@ -1,7 +1,11 @@
 package com.semillero.solicitudes.controllers;
 
+import com.semillero.solicitudes.dto.CargosDTO;
+import com.semillero.solicitudes.dto.EmpleadosDTO;
 import com.semillero.solicitudes.persistence.EmpleadosRepository;
+import com.semillero.solicitudes.dto.EmpleadosDTO;
 import com.semillero.solicitudes.persistence.entities.EmpleadoEntity;
+import com.semillero.solicitudes.services.CargoService;
 import com.semillero.solicitudes.services.EmpleadoService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +20,12 @@ import java.util.List;
 public class EmpleadosController {
 
     private final EmpleadoService empleadoService;
+    private final CargoService cargoService;
 
     @Autowired
-    public EmpleadosController (EmpleadoService empleadoService) {
+    public EmpleadosController (EmpleadoService empleadoService, CargoService cargoService) {
         this.empleadoService = empleadoService;
+        this.cargoService = cargoService;
     }
 
     @RequestMapping("/getAll")
@@ -37,8 +43,9 @@ public class EmpleadosController {
     }
 
     @PostMapping("/create")
-    public EmpleadoEntity createEmpleado(@RequestBody EmpleadoEntity empleado){
-        EmpleadoEntity existingEmpleado = empleadoService.findByDocumento(empleado.getDocumento());
+    public EmpleadoEntity createEmpleado(@RequestBody EmpleadosDTO empleadoDTO){
+        EmpleadoEntity empleado = convertDtoToEntity(empleadoDTO);
+        EmpleadoEntity existingEmpleado = empleadoService.findByDocumento(empleadoDTO.getDocumento());
         if (existingEmpleado != null) {
             throw new IllegalArgumentException("Ya existe un empleado con el documento: " + empleado.getDocumento());
         }
@@ -72,4 +79,23 @@ public class EmpleadosController {
     public ResponseEntity<String> handleIllegalArgumentException(IllegalArgumentException ex) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
+
+    public EmpleadoEntity convertDtoToEntity(EmpleadosDTO empleadoDto) {
+    EmpleadoEntity empleado = new EmpleadoEntity();
+    empleado.setId(empleadoDto.getId());
+    empleado.setDocumento(empleadoDto.getDocumento());
+    empleado.setTipoDocumento(empleadoDto.getTipoDocumento());
+    empleado.setNombre(empleadoDto.getNombre());
+    empleado.setApellido(empleadoDto.getApellido());
+    empleado.setTelefono(empleadoDto.getTelefono());
+    empleado.setDireccion(empleadoDto.getDireccion());
+    empleado.setFechaIngreso(empleadoDto.getFechaIngreso());
+    empleado.setFechaRetiro(empleadoDto.getFechaRetiro());
+    empleado.setTipoContrato(empleadoDto.getTipoContrato());
+    empleado.setEstado(empleadoDto.getEstado());
+    empleado.setSupervisor(empleadoService.getEmpleadoById(empleadoDto.getSupervisor()));
+    CargosDTO cargo = empleadoDto.getCargo();
+    empleado.setCargo(cargoService.getCargoById(cargo.getId()));
+    return empleado;
+}
 }
