@@ -2,8 +2,6 @@ package com.semillero.solicitudes.controllers;
 
 import com.semillero.solicitudes.dto.CargosDTO;
 import com.semillero.solicitudes.dto.EmpleadosDTO;
-import com.semillero.solicitudes.persistence.EmpleadosRepository;
-import com.semillero.solicitudes.dto.EmpleadosDTO;
 import com.semillero.solicitudes.persistence.entities.EmpleadoEntity;
 import com.semillero.solicitudes.services.CargoService;
 import com.semillero.solicitudes.services.EmpleadoService;
@@ -44,7 +42,7 @@ public class EmpleadosController {
 
     @PostMapping("/create")
     public EmpleadoEntity createEmpleado(@RequestBody EmpleadosDTO empleadoDTO){
-        EmpleadoEntity empleado = convertDtoToEntity(empleadoDTO);
+        EmpleadoEntity empleado = convertEmpleadosDtoToEmpleadosEntity(empleadoDTO);
         EmpleadoEntity existingEmpleado = empleadoService.findByDocumento(empleadoDTO.getDocumento());
         if (existingEmpleado != null) {
             throw new IllegalArgumentException("Ya existe un empleado con el documento: " + empleado.getDocumento());
@@ -53,7 +51,8 @@ public class EmpleadosController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<EmpleadoEntity> updateEmpleado(@RequestBody EmpleadoEntity empleado){
+    public ResponseEntity<EmpleadoEntity> updateEmpleado(@RequestBody EmpleadosDTO empleadoDTO){
+        EmpleadoEntity empleado = convertEmpleadosDtoToEmpleadosEntity(empleadoDTO);
         EmpleadoEntity existingEmpleado = empleadoService.getEmpleadoById(empleado.getId());
         if (existingEmpleado == null) {
             throw new EntityNotFoundException("Empleado no encontrado con id: " + empleado.getId());
@@ -80,7 +79,7 @@ public class EmpleadosController {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
-    public EmpleadoEntity convertDtoToEntity(EmpleadosDTO empleadoDto) {
+    public EmpleadoEntity convertEmpleadosDtoToEmpleadosEntity(EmpleadosDTO empleadoDto) {
     EmpleadoEntity empleado = new EmpleadoEntity();
     empleado.setId(empleadoDto.getId());
     empleado.setDocumento(empleadoDto.getDocumento());

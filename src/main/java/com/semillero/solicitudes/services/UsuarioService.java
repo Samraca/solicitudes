@@ -54,4 +54,5 @@ public class UsuarioService implements IUsuario {
     public UsuarioEntity findByUsername(String username) {
         return usuarioRepository.findByUsername(username);
     }
+
 }

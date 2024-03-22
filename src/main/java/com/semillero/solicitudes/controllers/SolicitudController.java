@@ -1,7 +1,10 @@
 package com.semillero.solicitudes.controllers;
 
+import com.semillero.solicitudes.dto.SolicitudDTO;
 import com.semillero.solicitudes.persistence.entities.SolicitudEntity;
+import com.semillero.solicitudes.persistence.entities.UsuarioEntity;
 import com.semillero.solicitudes.services.SolicitudService;
+import com.semillero.solicitudes.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import java.util.Optional;
 public class SolicitudController {
 
     private final SolicitudService solicitudService;
+    private UsuarioService usuarioService;
 
     @Autowired
     public SolicitudController(SolicitudService solicitudService) {
@@ -28,7 +32,8 @@ public class SolicitudController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<String> createSolicitud(@RequestBody SolicitudEntity solicitud){
+    public ResponseEntity<String> createSolicitud(@RequestBody SolicitudDTO solicitudDto){
+        SolicitudEntity solicitud = convertSolicitudDtoToSolicitudEntity(solicitudDto);
         if (solicitudService.aprobarSolicitud(solicitud)) {
             return new ResponseEntity<>("La solicitud ha sido aprobada", HttpStatus.OK);
         } else {
@@ -41,4 +46,23 @@ public class SolicitudController {
         Optional<List<SolicitudEntity>> solicitudes = solicitudService.getSolicitudesByEmpleadoId(empleadoId);
         return solicitudes.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
+    public SolicitudEntity convertSolicitudDtoToSolicitudEntity(SolicitudDTO solicitudDto) {
+    SolicitudEntity solicitud = new SolicitudEntity();
+    solicitud.setId(solicitudDto.getIdEmpleado());
+    solicitud.setFechaInicio(solicitudDto.getFechaInicio());
+    solicitud.setFechaFin(solicitudDto.getFechaFin());
+    solicitud.setDiasSolicitados(solicitudDto.getDiasSolicitados());
+    solicitud.setObservaciones(solicitudDto.getObservaciones());
+    solicitud.setEstado(solicitudDto.getEstado());
+    solicitud.setFechaCreacion(solicitudDto.getFechaCreacion());
+    solicitud.setFechaRetorno(solicitudDto.getFechaRetorno());
+    // ... establecer otros campos ...
+
+    // Buscar el UsuarioEntity correspondiente al ID del empleado
+    UsuarioEntity usuario = usuarioService.getUsuarioByEmpleadoId(solicitudDto.getIdEmpleado());
+    solicitud.setUsuario(usuario);
+
+    return solicitud;
+}
 }

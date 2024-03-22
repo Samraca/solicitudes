@@ -19,6 +19,8 @@ import java.time.ZoneId;
 @Service
 public class SolicitudService implements ISolicitud {
     SolicitudRepository solicitudRepository;
+    @Autowired
+    private UsuarioService usuarioService;
 
     @Autowired
     public SolicitudService(SolicitudRepository solicitudRepository) {
@@ -57,9 +59,6 @@ public class SolicitudService implements ISolicitud {
         return Optional.ofNullable(solicitudes.isEmpty() ? null : solicitudes);
     }
 
-    @Autowired
-    private UsuarioService usuarioService;
-
     public boolean aprobarSolicitud(SolicitudEntity solicitud) {
         UsuarioEntity usuario = usuarioService.getUsuarioById(solicitud.getId());
         EmpleadoEntity empleado = usuario.getEmpleado();
@@ -71,10 +70,10 @@ public class SolicitudService implements ISolicitud {
         double anosTrabajados = (double) diasTrabajados / 365;
         int diasVacaciones = (int) Math.round(anosTrabajados * 15);
         int diasAnticipacion = calcularDiasHabiles(LocalDate.now(), solicitud.getFechaInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
-
+        boolean isDateValid = solicitud.getFechaInicio().after(solicitud.getFechaCreacion()) && solicitud.getFechaInicio().before(solicitud.getFechaFin());
         return !tipoContrato.equals("prestacion de servicios")
         && solicitud.getDiasSolicitados() <= diasVacaciones
-        && diasAnticipacion >= 15 && diasTrabajados >= 60;
+        && diasAnticipacion >= 15 && diasTrabajados >= 60 && isDateValid;
     }
 
     public int calcularDiasHabiles(LocalDate fechaInicio, LocalDate fechaFin) {
