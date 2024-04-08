@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "cargos")
-public class CargosEntity {
+public class JobsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nm_id_cargo")
@@ -28,7 +28,7 @@ public class CargosEntity {
     @Column(name = "ds_activo")
     private String activo;
 
-    public CargosEntity() {
+    public JobsEntity() {
     }
     public int getId() {
         return id;

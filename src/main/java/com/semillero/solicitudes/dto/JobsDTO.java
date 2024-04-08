@@ -1,9 +1,9 @@
 package com.semillero.solicitudes.dto;
 
-public class CargosDTO {
+public class JobsDTO {
     private int id;
 
-    public CargosDTO(int id) {
+    public JobsDTO(int id) {
         this.id = id;
     }
 

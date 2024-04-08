@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "usuario")
-public class UsuarioEntity {
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,7 +16,7 @@ public class UsuarioEntity {
     @Basic(optional = false)
     @ManyToOne
     @JoinColumn(name = "nm_id_empleado")
-    private EmpleadoEntity empleado;
+    private EmployeeEntity empleado;
 
     @Basic(optional = false)
     @Column(name = "ds_usaurio")
@@ -37,9 +37,9 @@ public class UsuarioEntity {
     @Basic(optional = false)
     @ManyToOne
     @JoinColumn(name = "nm_rol")
-    private RolEntity rol;
+    private RoleEntity rol;
 
-    public UsuarioEntity() {
+    public UserEntity() {
     }
     public int getId() {
         return id;
@@ -49,11 +49,11 @@ public class UsuarioEntity {
         this.id = id;
     }
 
-    public EmpleadoEntity getEmpleado() {
+    public EmployeeEntity getEmpleado() {
         return empleado;
     }
 
-    public void setEmpleado(EmpleadoEntity empleado) {
+    public void setEmpleado(EmployeeEntity empleado) {
         this.empleado = empleado;
     }
 
@@ -89,11 +89,11 @@ public class UsuarioEntity {
         this.password = password;
     }
 
-    public RolEntity getRol() {
+    public RoleEntity getRol() {
         return rol;
     }
 
-    public void setRol(RolEntity rol) {
+    public void setRol(RoleEntity rol) {
         this.rol = rol;
     }
 }

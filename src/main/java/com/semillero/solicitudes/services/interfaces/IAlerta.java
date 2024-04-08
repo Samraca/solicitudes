@@ -1,17 +1,17 @@
 package com.semillero.solicitudes.services.interfaces;
 
-import com.semillero.solicitudes.persistence.entities.AlertaEntity;
+import com.semillero.solicitudes.persistence.entities.AlertEntity;
 
 import java.util.List;
 
 public interface IAlerta {
-    List<AlertaEntity> getAllAlertas();
+    List<AlertEntity> getAllAlertas();
 
-    AlertaEntity getAlertaById(Integer id);
+    AlertEntity getAlertaById(Integer id);
 
-    AlertaEntity createAlerta(AlertaEntity alerta);
+    AlertEntity createAlerta(AlertEntity alerta);
 
-    AlertaEntity updateAlerta(AlertaEntity alerta);
+    AlertEntity updateAlerta(AlertEntity alerta);
 
     void deleteAlerta(Integer id);
 

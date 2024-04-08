@@ -1,7 +1,7 @@
 package com.semillero.solicitudes.services;
 
-import com.semillero.solicitudes.persistence.CargosRepository;
-import com.semillero.solicitudes.persistence.entities.CargosEntity;
+import com.semillero.solicitudes.persistence.JobsRepository;
+import com.semillero.solicitudes.persistence.entities.JobsEntity;
 import com.semillero.solicitudes.services.interfaces.ICargo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,32 +9,32 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class CargoService implements ICargo {
+public class JobsService implements ICargo {
 
-    private final CargosRepository cargoRepository;
+    private final JobsRepository cargoRepository;
 
     @Autowired
-    public CargoService(CargosRepository cargoRepository) {
+    public JobsService(JobsRepository cargoRepository) {
         this.cargoRepository = cargoRepository;
     }
 
     @Override
-    public List<CargosEntity> getAllCargos() {
+    public List<JobsEntity> getAllCargos() {
         return cargoRepository.findAll();
     }
 
     @Override
-    public CargosEntity getCargoById(Integer id) {
+    public JobsEntity getCargoById(Integer id) {
         return cargoRepository.findById(id).orElse(null);
     }
 
     @Override
-    public CargosEntity createCargo(CargosEntity cargo) {
+    public JobsEntity createCargo(JobsEntity cargo) {
         return cargoRepository.save(cargo);
     }
 
     @Override
-    public CargosEntity updateCargo(CargosEntity cargo) {
+    public JobsEntity updateCargo(JobsEntity cargo) {
         return cargoRepository.save(cargo);
     }
 

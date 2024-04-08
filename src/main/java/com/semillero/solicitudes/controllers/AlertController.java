@@ -1,7 +1,7 @@
 package com.semillero.solicitudes.controllers;
 
-import com.semillero.solicitudes.persistence.entities.RolEntity;
-import com.semillero.solicitudes.services.RolService;
+import com.semillero.solicitudes.persistence.entities.AlertEntity;
+import com.semillero.solicitudes.services.AlertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,18 +12,18 @@ import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/rol")
-public class RolController {
+@RequestMapping("/alertas")
+public class AlertController {
 
-    private final RolService rolService;
-    
+    private final AlertService alertService;
+
     @Autowired
-    public RolController(RolService rolService) {
-        this.rolService = rolService;
+    public AlertController(AlertService alertService) {
+        this.alertService = alertService;
     }
 
     @RequestMapping("/getAll")
-    public ResponseEntity<List<RolEntity>> getAllRoles(){
-        return ResponseEntity.ok(rolService.getAllRoles());
+    public ResponseEntity<List<AlertEntity>> getAllAlertas(){
+        return ResponseEntity.ok(alertService.getAllAlertas());
     }
 }

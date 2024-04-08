@@ -2,7 +2,7 @@ package com.semillero.solicitudes.dto;
 
 import java.util.Date;
 
-public class SolicitudDTO {
+public class RequisitionDTO {
     private int idEmpleado;
     private Date fechaInicio;
     private Date fechaFin;

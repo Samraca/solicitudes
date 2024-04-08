@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "rol_usuario")
-public class RolEntity {
+public class RoleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,7 +21,7 @@ public class RolEntity {
     @Column(name = "fe_fecha_creacion")
     private Date fechaCreacion;
 
-    public RolEntity() {
+    public RoleEntity() {
     }
     public int getId() {
         return id;

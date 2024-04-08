@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "solicitud_vaciones")
-public class SolicitudEntity {
+public class RequisitionEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "nm_id_solicitud")
@@ -15,7 +15,7 @@ public class SolicitudEntity {
     @Basic(optional = false)
     @ManyToOne
     @JoinColumn(name = "nm_id_usuario")
-    private UsuarioEntity usuario;
+    private UserEntity usuario;
 
     @Basic(optional = false)
     @Column(name = "nm_dias_solicita")
@@ -45,7 +45,7 @@ public class SolicitudEntity {
     @Column(name = "fe_fecha_creacion")
     private Date fechaCreacion;
 
-    public SolicitudEntity() {
+    public RequisitionEntity() {
     }
     public int getId() {
         return id;
@@ -55,11 +55,11 @@ public class SolicitudEntity {
         this.id = id;
     }
 
-    public UsuarioEntity getUsuario() {
+    public UserEntity getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(UsuarioEntity usuario) {
+    public void setUsuario(UserEntity usuario) {
         this.usuario = usuario;
     }
 

@@ -1,13 +1,13 @@
 package com.semillero.solicitudes.services.interfaces;
 
-import com.semillero.solicitudes.persistence.entities.EmpleadoEntity;
+import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
 
 import java.util.List;
 
 public interface IEmpleado {
-    List<EmpleadoEntity> getAllEmpleados();
-    EmpleadoEntity getEmpleadoById(Integer id);
-    EmpleadoEntity createEmpleado(EmpleadoEntity empleado);
-    EmpleadoEntity updateEmpleado(EmpleadoEntity empleado);
+    List<EmployeeEntity> getAllEmpleados();
+    EmployeeEntity getEmpleadoById(Integer id);
+    EmployeeEntity createEmpleado(EmployeeEntity empleado);
+    EmployeeEntity updateEmpleado(EmployeeEntity empleado);
     void deleteEmpleado(Integer id);
 }

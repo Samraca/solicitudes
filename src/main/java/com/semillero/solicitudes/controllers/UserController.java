@@ -1,10 +1,9 @@
 package com.semillero.solicitudes.controllers;
 
 import com.semillero.solicitudes.dto.LoginRequest;
-import com.semillero.solicitudes.persistence.UsuarioRepository;
-import com.semillero.solicitudes.persistence.entities.UsuarioEntity;
+import com.semillero.solicitudes.persistence.entities.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.semillero.solicitudes.services.UsuarioService;
+import com.semillero.solicitudes.services.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,24 +12,24 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/usuarios")
-public class UsuarioController {
+public class UserController {
 
-    private final UsuarioService usuarioService;
+    private final UserService userService;
 
     @Autowired
-    public UsuarioController(UsuarioService usuarioService) {
-        this.usuarioService = usuarioService;
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
     @RequestMapping("/getAll")
-    public ResponseEntity<List<UsuarioEntity>> getAllUsuarios(){
-        return ResponseEntity.ok(usuarioService.getAllUsuarios());
+    public ResponseEntity<List<UserEntity>> getAllUsuarios(){
+        return ResponseEntity.ok(userService.getAllUsuarios());
     }
 
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        UsuarioEntity usuario = usuarioService.findByUsername(loginRequest.getUsername());
+        UserEntity usuario = userService.findByUsername(loginRequest.getUsername());
         if (usuario != null && usuario.getPassword().equals(loginRequest.getPassword())) {
             return ResponseEntity.ok("Usuario autenticado correctamente");
         } else {

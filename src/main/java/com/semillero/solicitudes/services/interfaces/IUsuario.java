@@ -1,17 +1,17 @@
 package com.semillero.solicitudes.services.interfaces;
 
-import com.semillero.solicitudes.persistence.entities.UsuarioEntity;
+import com.semillero.solicitudes.persistence.entities.UserEntity;
 
 import java.util.List;
 
 public interface IUsuario {
-    List<UsuarioEntity> getAllUsuarios();
+    List<UserEntity> getAllUsuarios();
 
-    UsuarioEntity getUsuarioById(Integer id);
+    UserEntity getUsuarioById(Integer id);
 
-    UsuarioEntity createUsuario(UsuarioEntity usuario);
+    UserEntity createUsuario(UserEntity usuario);
 
-    UsuarioEntity updateUsuario(UsuarioEntity usuario);
+    UserEntity updateUsuario(UserEntity usuario);
 
     void deleteUsuario(Integer id);
 }

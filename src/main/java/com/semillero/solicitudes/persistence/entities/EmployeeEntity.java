@@ -1,30 +1,70 @@
-package com.semillero.solicitudes.dto;
+package com.semillero.solicitudes.persistence.entities;
+
+import jakarta.persistence.*;
 
 import java.util.Date;
 
-public class EmpleadosDTO {
+@Entity
+@Table(name = "empleado")
+public class EmployeeEntity {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "nm_id_empleado")
     private int id;
+
+    @Basic(optional = false)
+    @Column(name = "nm_documento")
     private int documento;
+
+    @Basic(optional = false)
+    @Column(name = "ds_tipo_documento")
     private String tipoDocumento;
+
+    @Basic(optional = false)
+    @Column(name = "ds_nombre")
     private String nombre;
+
+    @Basic(optional = false)
+    @Column(name = "ds_apellido")
     private String apellido;
+
+    @Basic(optional = false)
+    @Column(name = "ds_telefono")
     private String telefono;
+
+    @Basic(optional = false)
+    @Column(name = "ds_direccion")
     private String direccion;
-    private CargosDTO cargo;
+
+    @Basic(optional = false)
+    @Column(name = "fe_fecha_ingreso")
     private Date fechaIngreso;
+
+    @Basic(optional = true)
+    @Column(name = "fe_fecha_retiro")
     private Date fechaRetiro;
+
+    @Basic(optional = false)
+    @Column(name = "ds_tipo_contrato")
     private String tipoContrato;
+
+    @Basic(optional = false)
+    @Column(name = "ds_estado_empleado")
     private String estado;
-    private int Supervisor;
 
-    public int getSupervisor() {
-        return Supervisor;
+    @Basic(optional = true)
+    @ManyToOne
+    @JoinColumn(name = "nm_supervisor_inmediato")
+    private EmployeeEntity supervisor;
+
+    @Basic(optional = false)
+    @ManyToOne
+    @JoinColumn(name = "nm_cargo")
+    private JobsEntity cargo;
+
+    public EmployeeEntity() {
     }
-
-    public void setSupervisor(int supervisor) {
-        Supervisor = supervisor;
-    }
-
     public int getId() {
         return id;
     }
@@ -81,14 +121,6 @@ public class EmpleadosDTO {
         this.direccion = direccion;
     }
 
-    public CargosDTO getCargo() {
-        return cargo;
-    }
-
-    public void setCargo(CargosDTO cargo) {
-        this.cargo = cargo;
-    }
-
     public Date getFechaIngreso() {
         return fechaIngreso;
     }
@@ -119,5 +151,21 @@ public class EmpleadosDTO {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public EmployeeEntity getSupervisor() {
+        return supervisor;
+    }
+
+    public void setSupervisor(EmployeeEntity supervisor) {
+        this.supervisor = supervisor;
+    }
+
+    public JobsEntity getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(JobsEntity cargo) {
+        this.cargo = cargo;
     }
 }

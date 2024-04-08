@@ -6,7 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "alerta")
-public class AlertaEntity {
+public class AlertEntity {
     @Id
     @GeneratedValue
     @Column(name = "nm_id_alerta")
@@ -32,7 +32,7 @@ public class AlertaEntity {
     @Column(name = "fe_fecha_creacion")
     private Date fecha;
 
-    public AlertaEntity() {
+    public AlertEntity() {
     }
     public int getId() {
         return id;

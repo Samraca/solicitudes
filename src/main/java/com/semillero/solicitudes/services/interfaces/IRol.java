@@ -1,17 +1,17 @@
 package com.semillero.solicitudes.services.interfaces;
 
-import com.semillero.solicitudes.persistence.entities.RolEntity;
+import com.semillero.solicitudes.persistence.entities.RoleEntity;
 
 import java.util.List;
 
 public interface IRol {
-    List<RolEntity> getAllRoles();
+    List<RoleEntity> getAllRoles();
 
-    RolEntity getRolById(Integer id);
+    RoleEntity getRolById(Integer id);
 
-    RolEntity createRol(RolEntity rol);
+    RoleEntity createRol(RoleEntity rol);
 
-    RolEntity updateRol(RolEntity rol);
+    RoleEntity updateRol(RoleEntity rol);
 
     void deleteRol(Integer id);
 }

@@ -1,17 +1,17 @@
 package com.semillero.solicitudes.services.interfaces;
 
-import com.semillero.solicitudes.persistence.entities.CargosEntity;
+import com.semillero.solicitudes.persistence.entities.JobsEntity;
 
 import java.util.List;
 
 public interface ICargo {
-    List<CargosEntity> getAllCargos();
+    List<JobsEntity> getAllCargos();
 
-    CargosEntity getCargoById(Integer id);
+    JobsEntity getCargoById(Integer id);
 
-    CargosEntity createCargo(CargosEntity cargo);
+    JobsEntity createCargo(JobsEntity cargo);
 
-    CargosEntity updateCargo(CargosEntity cargo);
+    JobsEntity updateCargo(JobsEntity cargo);
 
     void deleteCargo(Integer id);
 }

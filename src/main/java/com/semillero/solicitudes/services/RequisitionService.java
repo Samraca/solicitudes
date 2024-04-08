@@ -1,9 +1,9 @@
 package com.semillero.solicitudes.services;
 
-import com.semillero.solicitudes.persistence.SolicitudRepository;
-import com.semillero.solicitudes.persistence.entities.EmpleadoEntity;
-import com.semillero.solicitudes.persistence.entities.SolicitudEntity;
-import com.semillero.solicitudes.persistence.entities.UsuarioEntity;
+import com.semillero.solicitudes.persistence.RequisitionRepository;
+import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
+import com.semillero.solicitudes.persistence.entities.RequisitionEntity;
+import com.semillero.solicitudes.persistence.entities.UserEntity;
 import com.semillero.solicitudes.services.interfaces.ISolicitud;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,51 +17,51 @@ import java.time.ZoneId;
 
 
 @Service
-public class SolicitudService implements ISolicitud {
-    SolicitudRepository solicitudRepository;
+public class RequisitionService implements ISolicitud {
+    RequisitionRepository requisitionRepository;
     @Autowired
-    private UsuarioService usuarioService;
+    private UserService userService;
 
     @Autowired
-    public SolicitudService(SolicitudRepository solicitudRepository) {
-        this.solicitudRepository = solicitudRepository;
+    public RequisitionService(RequisitionRepository requisitionRepository) {
+        this.requisitionRepository = requisitionRepository;
     }
 
     @Override
-    public List<SolicitudEntity> getAllSolicitudes() {
-        return solicitudRepository.findAll();
+    public List<RequisitionEntity> getAllSolicitudes() {
+        return requisitionRepository.findAll();
     }
 
     @Override
-    public SolicitudEntity getSolicitudById(Integer id) {
-        return solicitudRepository.findById(id).orElse(null);
+    public RequisitionEntity getSolicitudById(Integer id) {
+        return requisitionRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Boolean createSolicitud(SolicitudEntity solicitud) {
-        SolicitudEntity solicitudCompleta = getSolicitudById(solicitud.getId());
+    public Boolean createSolicitud(RequisitionEntity solicitud) {
+        RequisitionEntity solicitudCompleta = getSolicitudById(solicitud.getId());
         return aprobarSolicitud(solicitudCompleta);
     }
 
     @Override
-    public SolicitudEntity updateSolicitud(SolicitudEntity solicitud) {
-        return solicitudRepository.save(solicitud);
+    public RequisitionEntity updateSolicitud(RequisitionEntity solicitud) {
+        return requisitionRepository.save(solicitud);
     }
 
     @Override
     public void deleteSolicitud(Integer id) {
-        solicitudRepository.deleteById(id);
+        requisitionRepository.deleteById(id);
     }
 
-    public Optional<List<SolicitudEntity>> getSolicitudesByEmpleadoId(Integer empleadoId) {
-        UsuarioEntity usuario = usuarioService.getUsuarioByEmpleadoId(empleadoId);
-        List<SolicitudEntity> solicitudes = solicitudRepository.findByUsuarioOrderByFechaCreacionDesc(usuario);
+    public Optional<List<RequisitionEntity>> getSolicitudesByEmpleadoId(Integer empleadoId) {
+        UserEntity usuario = userService.getUsuarioByEmpleadoId(empleadoId);
+        List<RequisitionEntity> solicitudes = requisitionRepository.findByUsuarioOrderByFechaCreacionDesc(usuario);
         return Optional.ofNullable(solicitudes.isEmpty() ? null : solicitudes);
     }
 
-    public boolean aprobarSolicitud(SolicitudEntity solicitud) {
-        UsuarioEntity usuario = usuarioService.getUsuarioById(solicitud.getId());
-        EmpleadoEntity empleado = usuario.getEmpleado();
+    public boolean aprobarSolicitud(RequisitionEntity solicitud) {
+        UserEntity usuario = userService.getUsuarioById(solicitud.getId());
+        EmployeeEntity empleado = usuario.getEmpleado();
         String tipoContrato = empleado.getTipoContrato();
 
         Date fechaIngreso = empleado.getFechaIngreso();
