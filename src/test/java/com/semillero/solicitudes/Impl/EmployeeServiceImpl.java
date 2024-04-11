@@ -1,21 +1,21 @@
-package com.semillero.solicitudes.services;
+package com.semillero.solicitudes.Impl;
 
 import com.semillero.solicitudes.persistence.EmployeesRepository;
-import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
+import com.semillero.solicitudes.services.EmployeeService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.List;
-
-@SpringBootTest
-class EmployeeServiceTest {
-    @Autowired
+@ExtendWith(MockitoExtension.class)
+class EmployeeServiceImpl {
+    @InjectMocks
     EmployeeService employeeService;
 
-    @Autowired
+    @Mock
     EmployeesRepository employeesRepository;
 
     @BeforeEach

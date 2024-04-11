@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.entities.RequisitionEntity;
 
 import java.util.List;
 
-public interface ISolicitud {
+public interface IRequisition {
     List<RequisitionEntity> getAllSolicitudes();
     RequisitionEntity getSolicitudById(Integer id);
     Boolean createSolicitud(RequisitionEntity solicitud);

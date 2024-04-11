@@ -2,14 +2,14 @@ package com.semillero.solicitudes.services;
 
 import com.semillero.solicitudes.persistence.EmployeesRepository;
 import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
-import com.semillero.solicitudes.services.interfaces.IEmpleado;
+import com.semillero.solicitudes.services.interfaces.IEmployee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EmployeeService implements IEmpleado {
+public class EmployeeService implements IEmployee {
     private final EmployeesRepository employeesRepository;
 
     @Autowired

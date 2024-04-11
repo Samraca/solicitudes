@@ -2,13 +2,13 @@ package com.semillero.solicitudes.services;
 
 import com.semillero.solicitudes.persistence.JobsRepository;
 import com.semillero.solicitudes.persistence.entities.JobsEntity;
-import com.semillero.solicitudes.services.interfaces.ICargo;
+import com.semillero.solicitudes.services.interfaces.IJobs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class JobsService implements ICargo {
+public class JobsService implements IJobs {
 
 
     private final JobsRepository jobsRepository;

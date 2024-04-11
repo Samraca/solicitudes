@@ -4,14 +4,14 @@ import com.semillero.solicitudes.persistence.UserRepository;
 import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
 import com.semillero.solicitudes.persistence.EmployeesRepository;
 import com.semillero.solicitudes.persistence.entities.UserEntity;
-import com.semillero.solicitudes.services.interfaces.IUsuario;
+import com.semillero.solicitudes.services.interfaces.IUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class UserService implements IUsuario {
+public class UserService implements IUser {
     private final UserRepository userRepository;
     private final EmployeesRepository employeesRepository;
 

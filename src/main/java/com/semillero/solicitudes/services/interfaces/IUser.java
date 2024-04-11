@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.entities.UserEntity;
 
 import java.util.List;
 
-public interface IUsuario {
+public interface IUser {
     List<UserEntity> getAllUsuarios();
 
     UserEntity getUsuarioById(Integer id);

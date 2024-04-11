@@ -1,19 +1,18 @@
-package com.semillero.solicitudes.services;
+package com.semillero.solicitudes.Impl;
 
 import com.semillero.solicitudes.persistence.JobsRepository;
-import com.semillero.solicitudes.persistence.entities.JobsEntity;
+import com.semillero.solicitudes.services.JobsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-
-import java.util.Arrays;
-
-import static org.mockito.Mockito.when;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 
-class JobsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class JobsServiceImpl {
 
     @Mock
     JobsRepository jobsRepository;
@@ -22,8 +21,9 @@ class JobsServiceTest {
 
     @BeforeEach
     void setup(){
-        when(jobsRepository.findAll()).thenReturn(Arrays.asList(new JobsEntity()));
+        jobsService = new JobsService(jobsRepository);
     }
+
     @Test
     void listOfJobIsNotNull(){
         Assertions.assertNotNull(jobsService.getAllCargos());

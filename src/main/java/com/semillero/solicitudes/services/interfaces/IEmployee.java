@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
 
 import java.util.List;
 
-public interface IEmpleado {
+public interface IEmployee {
     List<EmployeeEntity> getAllEmpleados();
     EmployeeEntity getEmpleadoById(Integer id);
     EmployeeEntity createEmpleado(EmployeeEntity empleado);

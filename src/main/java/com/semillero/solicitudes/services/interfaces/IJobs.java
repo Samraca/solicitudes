@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.entities.JobsEntity;
 
 import java.util.List;
 
-public interface ICargo {
+public interface IJobs {
     List<JobsEntity> getAllCargos();
 
     JobsEntity getCargoById(Integer id);

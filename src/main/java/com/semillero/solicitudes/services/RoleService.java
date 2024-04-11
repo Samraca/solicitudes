@@ -2,14 +2,14 @@ package com.semillero.solicitudes.services;
 
 import com.semillero.solicitudes.persistence.RoleRepository;
 import com.semillero.solicitudes.persistence.entities.RoleEntity;
-import com.semillero.solicitudes.services.interfaces.IRol;
+import com.semillero.solicitudes.services.interfaces.IRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RoleService implements IRol {
+public class RoleService implements IRole {
 
     private final RoleRepository roleRepository;
 

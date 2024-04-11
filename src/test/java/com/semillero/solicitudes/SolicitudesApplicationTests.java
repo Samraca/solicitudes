@@ -13,7 +13,7 @@ class SolicitudesApplicationTests {
 	@Autowired
 	private MockMvc mockMvc;
 	@Test
-	public void ifIdInGetSolicitudByIdExist() {
+	void ifIdInGetSolicitudByIdExist() {
 	}
 
 }

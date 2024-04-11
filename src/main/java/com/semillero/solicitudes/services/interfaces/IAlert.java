@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.entities.AlertEntity;
 
 import java.util.List;
 
-public interface IAlerta {
+public interface IAlert {
     List<AlertEntity> getAllAlertas();
 
     AlertEntity getAlertaById(Integer id);

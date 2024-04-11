@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.RequisitionRepository;
 import com.semillero.solicitudes.persistence.entities.EmployeeEntity;
 import com.semillero.solicitudes.persistence.entities.RequisitionEntity;
 import com.semillero.solicitudes.persistence.entities.UserEntity;
-import com.semillero.solicitudes.services.interfaces.ISolicitud;
+import com.semillero.solicitudes.services.interfaces.IRequisition;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ import java.time.ZoneId;
 
 
 @Service
-public class RequisitionService implements ISolicitud {
+public class RequisitionService implements IRequisition {
     RequisitionRepository requisitionRepository;
     @Autowired
     private UserService userService;

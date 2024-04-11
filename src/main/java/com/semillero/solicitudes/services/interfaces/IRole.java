@@ -4,7 +4,7 @@ import com.semillero.solicitudes.persistence.entities.RoleEntity;
 
 import java.util.List;
 
-public interface IRol {
+public interface IRole {
     List<RoleEntity> getAllRoles();
 
     RoleEntity getRolById(Integer id);
