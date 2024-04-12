@@ -5,13 +5,13 @@ import com.semillero.solicitudes.persistence.entities.UserEntity;
 import java.util.List;
 
 public interface IUser {
-    List<UserEntity> getAllUsuarios();
+    List<UserEntity> getAllUsers();
 
-    UserEntity getUsuarioById(Integer id);
+    UserEntity getUsersById(Integer id);
 
-    UserEntity createUsuario(UserEntity usuario);
+    UserEntity createUser(UserEntity usuario);
 
-    UserEntity updateUsuario(UserEntity usuario);
+    UserEntity updateUser(UserEntity usuario);
 
-    String deleteUsuario(Integer id);
+    String deleteUser(Integer id);
 }

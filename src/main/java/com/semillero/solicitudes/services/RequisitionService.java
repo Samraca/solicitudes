@@ -58,13 +58,13 @@ public class RequisitionService implements IRequisition {
     }
 
     public Optional<List<RequisitionEntity>> getRequisitionByEmployeeId(Integer empleadoId) {
-        UserEntity usuario = userService.getUsuarioByEmpleadoId(empleadoId);
+        UserEntity usuario = userService.getUsersByEmployeeId(empleadoId);
         List<RequisitionEntity> solicitudes = requisitionRepository.findByUsuarioOrderByFechaCreacionDesc(usuario);
         return Optional.ofNullable(solicitudes.isEmpty() ? null : solicitudes);
     }
 
     public boolean checkRequisition(RequisitionEntity solicitud) {
-        UserEntity usuario = userService.getUsuarioById(solicitud.getId());
+        UserEntity usuario = userService.getUsersById(solicitud.getId());
         EmployeeEntity empleado = usuario.getEmpleado();
         String tipoContrato = empleado.getTipoContrato();
 

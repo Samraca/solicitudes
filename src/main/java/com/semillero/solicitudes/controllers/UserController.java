@@ -23,7 +23,7 @@ public class UserController {
 
     @RequestMapping("/getAll")
     public ResponseEntity<List<UserEntity>> getAllUsuarios(){
-        return ResponseEntity.ok(userService.getAllUsuarios());
+        return ResponseEntity.ok(userService.getAllUsers());
     }
 
 

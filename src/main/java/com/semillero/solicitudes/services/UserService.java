@@ -22,32 +22,32 @@ public class UserService implements IUser {
     }
 
     @Override
-    public List<UserEntity> getAllUsuarios() {
+    public List<UserEntity> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public UserEntity getUsuarioById(Integer id) {
+    public UserEntity getUsersById(Integer id) {
         return userRepository.findById(id).orElse(null);
     }
 
-    public UserEntity getUsuarioByEmpleadoId(Integer empleadoId) {
+    public UserEntity getUsersByEmployeeId(Integer empleadoId) {
         EmployeeEntity empleado = employeesRepository.findById(empleadoId).orElse(null);
         return userRepository.findByEmpleadoId(empleado);
     }
 
     @Override
-    public UserEntity createUsuario(UserEntity usuario) {
+    public UserEntity createUser(UserEntity usuario) {
         return userRepository.save(usuario);
     }
 
     @Override
-    public UserEntity updateUsuario(UserEntity usuario) {
+    public UserEntity updateUser(UserEntity usuario) {
         return userRepository.save(usuario);
     }
 
     @Override
-    public String deleteUsuario(Integer id) {
+    public String deleteUser(Integer id) {
         try{
             userRepository.deleteById(id);
             return "Deleted";

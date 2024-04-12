@@ -35,19 +35,19 @@ class UserServiceImpl {
     @DisplayName("users list could be empty but not null")
     @Test
     void listOfUserIsNotNull (){
-        Assertions.assertNotNull(userService.getAllUsuarios());
+        Assertions.assertNotNull(userService.getAllUsers());
     }
 
     @DisplayName("search user by id returns an user or null")
     @Test
     void returnedValueFromGetUserByIdIsNullOrUser (){
-        Assertions.assertTrue(userService.getUsuarioById(Mockito.anyInt())==null || userService.getUsuarioById(Mockito.anyInt()) != null);
+        Assertions.assertTrue(userService.getUsersById(Mockito.anyInt())==null || userService.getUsersById(Mockito.anyInt()) != null);
     }
 
     @DisplayName("search user by employee id returns an user or null")
     @Test
     void returnedValueFromGetUserByEmployeeIdIsNullOrUser () {
-        Assertions.assertTrue(userService.getUsuarioByEmpleadoId(Mockito.anyInt()) == null || userService.getUsuarioByEmpleadoId(Mockito.anyInt()) != null);
+        Assertions.assertTrue(userService.getUsersByEmployeeId(Mockito.anyInt()) == null || userService.getUsersByEmployeeId(Mockito.anyInt()) != null);
     }
 
     @DisplayName("search user by username returns an user or null")
@@ -62,7 +62,7 @@ class UserServiceImpl {
         UserEntity expectedUser = new UserEntity();
         when(userRepository.save(expectedUser)).thenReturn(expectedUser);
 
-        final UserEntity result = userService.createUsuario(expectedUser);
+        final UserEntity result = userService.createUser(expectedUser);
 
         Assertions.assertEquals(expectedUser, result);
     }
@@ -73,7 +73,7 @@ class UserServiceImpl {
         UserEntity expectedUserToUpdate = new UserEntity();
         when(userRepository.save(expectedUserToUpdate)).thenReturn(expectedUserToUpdate);
 
-        final UserEntity result = userService.updateUsuario(expectedUserToUpdate);
+        final UserEntity result = userService.updateUser(expectedUserToUpdate);
 
         Assertions.assertEquals(expectedUserToUpdate, result);
     }
@@ -81,7 +81,7 @@ class UserServiceImpl {
     @DisplayName("delete user returns deleted")
     @Test
     void givenIdOfUserToDeleteExpectDeleted(){
-        Assertions.assertEquals("Deleted", userService.deleteUsuario(Mockito.anyInt()));
+        Assertions.assertEquals("Deleted", userService.deleteUser(Mockito.anyInt()));
     }
 
 }

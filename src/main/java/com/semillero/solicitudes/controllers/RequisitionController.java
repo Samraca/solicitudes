@@ -60,7 +60,7 @@ public class RequisitionController {
     // ... establecer otros campos ...
 
     // Buscar el UserEntity correspondiente al ID del empleado
-    UserEntity usuario = userService.getUsuarioByEmpleadoId(requisitionDto.getIdEmpleado());
+    UserEntity usuario = userService.getUsersByEmployeeId(requisitionDto.getIdEmpleado());
     solicitud.setUsuario(usuario);
 
     return solicitud;
