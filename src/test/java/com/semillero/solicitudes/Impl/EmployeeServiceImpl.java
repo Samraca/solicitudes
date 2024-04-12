@@ -31,19 +31,19 @@ class EmployeeServiceImpl {
     @DisplayName("employees list could be empty but not null")
     @Test
     void listOfEmployeeIsNotNull(){
-        Assertions.assertNotNull(employeeService.getAllEmpleados());
+        Assertions.assertNotNull(employeeService.getAllEmployees());
     }
 
     @DisplayName("search employee by id returns an employee or null")
     @Test
     void returnedValueFromGetEmployeeByIdIsNullOrEmployee(){
-        Assertions.assertTrue(employeeService.getEmpleadoById(Mockito.anyInt())==null || employeeService.getEmpleadoById(Mockito.anyInt())!= null);
+        Assertions.assertTrue(employeeService.getEmployeeById(Mockito.anyInt())==null || employeeService.getEmployeeById(Mockito.anyInt())!= null);
     }
 
     @DisplayName("search employee by document returns an employee or null")
     @Test
     void returnedValueFromFindEmployeeByDocumentIsNullOrEmployee(){
-        Assertions.assertTrue(employeeService.findByDocumento(Mockito.anyInt())==null || employeeService.findByDocumento(Mockito.anyInt())!=null);
+        Assertions.assertTrue(employeeService.findByDocument(Mockito.anyInt())==null || employeeService.findByDocument(Mockito.anyInt())!=null);
     }
 
     @DisplayName("create employee returns expected employee")
@@ -52,7 +52,7 @@ class EmployeeServiceImpl {
         EmployeeEntity expectedEmployee = new EmployeeEntity();
         when(employeesRepository.save(expectedEmployee)).thenReturn(expectedEmployee);
 
-        final EmployeeEntity result = employeeService.createEmpleado(expectedEmployee);
+        final EmployeeEntity result = employeeService.createEmployee(expectedEmployee);
 
         Assertions.assertEquals(expectedEmployee, result);
     }
@@ -63,7 +63,7 @@ class EmployeeServiceImpl {
         EmployeeEntity expectedEmployeeToUpdate = new EmployeeEntity();
         when(employeesRepository.save(expectedEmployeeToUpdate)).thenReturn(expectedEmployeeToUpdate);
 
-        final EmployeeEntity result = employeeService.updateEmpleado(expectedEmployeeToUpdate);
+        final EmployeeEntity result = employeeService.updateEmployee(expectedEmployeeToUpdate);
 
         Assertions.assertEquals(expectedEmployeeToUpdate, result);
     }
@@ -71,6 +71,6 @@ class EmployeeServiceImpl {
     @DisplayName("delete employee returns deleted")
     @Test
     void givenIdOfEmployeeToDeleteExpectDeleted(){
-        Assertions.assertEquals("Deleted", employeeService.deleteEmpleado(Mockito.anyInt()));
+        Assertions.assertEquals("Deleted", employeeService.deleteEmployee(Mockito.anyInt()));
     }
 }

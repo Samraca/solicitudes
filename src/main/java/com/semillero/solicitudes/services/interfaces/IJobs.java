@@ -5,13 +5,13 @@ import com.semillero.solicitudes.persistence.entities.JobsEntity;
 import java.util.List;
 
 public interface IJobs {
-    List<JobsEntity> getAllCargos();
+    List<JobsEntity> getAllJobs();
 
-    JobsEntity getCargoById(Integer id);
+    JobsEntity getJobById(Integer id);
 
-    JobsEntity createCargo(JobsEntity cargo);
+    JobsEntity createJob(JobsEntity cargo);
 
-    JobsEntity updateCargo(JobsEntity cargo);
+    JobsEntity updateJob(JobsEntity cargo);
 
-    String deleteCargo(Integer id);
+    String deleteJob(Integer id);
 }

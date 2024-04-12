@@ -14,12 +14,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-import java.util.Locale;
 
 import static org.mockito.Mockito.when;
 
@@ -47,26 +45,26 @@ class RequisitionServiceImpl {
     @DisplayName("requisition list could be empty but not null")
     @Test
     void listOfRequisitionsIsNotNull(){
-        Assertions.assertNotNull(requisitionService.getAllSolicitudes());
+        Assertions.assertNotNull(requisitionService.getAllRequisitions());
     }
 
     @DisplayName("search requisition by id returns an requisition or null")
     @Test
     void returnedValueFromGetRequisitionByIdIsNullOrRequisition(){
-        Assertions.assertTrue(requisitionService.getSolicitudById(1)==null || requisitionService.getSolicitudById(1)!=null);
+        Assertions.assertTrue(requisitionService.getRequisitionById(1)==null || requisitionService.getRequisitionById(1)!=null);
     }
 
     @DisplayName("search requisition by employee id returns an requisition or null")
     @Test
     void returnedValueFromGetRequisitionByEmployeeIdIsNullOrRequisition(){
-        Assertions.assertTrue(requisitionService.getSolicitudesByEmpleadoId(1).isEmpty() || requisitionService.getSolicitudesByEmpleadoId(1).isPresent());
+        Assertions.assertTrue(requisitionService.getRequisitionByEmployeeId(1).isEmpty() || requisitionService.getRequisitionByEmployeeId(1).isPresent());
     }
 
     @DisplayName("create empty requisition returns false")
     @Test
     void givenRequisitionToCreateExpectRequisitionCreated(){
         RequisitionEntity expectedRequisition = new RequisitionEntity();
-        final Boolean result = requisitionService.aprobarSolicitud(expectedRequisition);
+        final Boolean result = requisitionService.checkRequisition(expectedRequisition);
         Assertions.assertFalse(result);
     }
 
@@ -76,7 +74,7 @@ class RequisitionServiceImpl {
         RequisitionEntity expectedRequisitionToUpdate = new RequisitionEntity();
         when(requisitionRepository.save(expectedRequisitionToUpdate)).thenReturn(expectedRequisitionToUpdate);
 
-        final RequisitionEntity result = requisitionService.updateSolicitud(expectedRequisitionToUpdate);
+        final RequisitionEntity result = requisitionService.updateRequisition(expectedRequisitionToUpdate);
 
         Assertions.assertEquals(expectedRequisitionToUpdate, result);
     }
@@ -84,7 +82,7 @@ class RequisitionServiceImpl {
     @DisplayName("delete requisition returns deleted")
     @Test
     void givenIdOfAlertToDeleteExpectDeleted(){
-        Assertions.assertEquals("Deleted", requisitionService.deleteSolicitud(Mockito.anyInt()));
+        Assertions.assertEquals("Deleted", requisitionService.deleteRequisition(Mockito.anyInt()));
     }
 
     @DisplayName("calculate days between two dates must be an int not null")
@@ -92,7 +90,7 @@ class RequisitionServiceImpl {
     void givenTwoDatesExpectIntNotNull(){
         Date initialDate = new Date();
         LocalDate initialLocalDate = initialDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        Assertions.assertNotNull(requisitionService.calcularDiasHabiles(initialLocalDate, LocalDate.now()));
+        Assertions.assertNotNull(requisitionService.calculateBusinessDay(initialLocalDate, LocalDate.now()));
     }
 
 }

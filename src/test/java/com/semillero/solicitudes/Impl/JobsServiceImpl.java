@@ -32,13 +32,13 @@ class JobsServiceImpl {
     @DisplayName("jobs list could be empty but not null")
     @Test
     void listOfJobIsNotNull(){
-        Assertions.assertNotNull(jobsService.getAllCargos());
+        Assertions.assertNotNull(jobsService.getAllJobs());
     }
 
     @DisplayName("jobs search by id returns a job or null")
     @Test
     void returnedValueFromGetJobsByIdIsNullOrJob (){
-        Assertions.assertTrue(jobsService.getCargoById(Mockito.anyInt())==null || jobsService.getCargoById(Mockito.anyInt())!=null);
+        Assertions.assertTrue(jobsService.getJobById(Mockito.anyInt())==null || jobsService.getJobById(Mockito.anyInt())!=null);
     }
 
     @DisplayName("create a job return the created job ")
@@ -46,7 +46,7 @@ class JobsServiceImpl {
     void givenJobToCreateExpectJobCreated(){
         JobsEntity expectedJob = new JobsEntity();
         when(jobsRepository.save(expectedJob)).thenReturn(expectedJob);
-        final JobsEntity result = jobsService.createCargo(expectedJob);
+        final JobsEntity result = jobsService.createJob(expectedJob);
         Assertions.assertEquals(expectedJob, result);
     }
 
@@ -55,13 +55,13 @@ class JobsServiceImpl {
     void givenAJobToUpdateExpectJobUpdated(){
         JobsEntity expectedUpdatedJob = new JobsEntity();
         when(jobsRepository.save(expectedUpdatedJob)).thenReturn(expectedUpdatedJob);
-        final JobsEntity result = jobsService.updateCargo(expectedUpdatedJob);
+        final JobsEntity result = jobsService.updateJob(expectedUpdatedJob);
         Assertions.assertEquals(expectedUpdatedJob, result);
     }
 
     @DisplayName("delete a job return deleted")
     @Test
     void givenAJobToDeleteExpectDeleted(){
-        Assertions.assertEquals( "Deleted", jobsService.deleteCargo(Mockito.anyInt()));
+        Assertions.assertEquals( "Deleted", jobsService.deleteJob(Mockito.anyInt()));
     }
 }

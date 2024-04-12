@@ -19,27 +19,27 @@ public class AlertService implements IAlert {
     }
 
     @Override
-    public List<AlertEntity> getAllAlertas() {
+    public List<AlertEntity> getAllAlerts() {
         return alertRepository.findAll();
     }
 
     @Override
-    public AlertEntity getAlertaById(Integer id) {
+    public AlertEntity getAlertsById(Integer id) {
         return alertRepository.findById(id).orElse(null);
     }
 
     @Override
-    public AlertEntity createAlerta(AlertEntity alerta) {
+    public AlertEntity createAlert(AlertEntity alerta) {
         return alertRepository.save(alerta);
     }
 
     @Override
-    public AlertEntity updateAlerta(AlertEntity alerta) {
+    public AlertEntity updateAlert(AlertEntity alerta) {
         return alertRepository.save(alerta);
     }
 
     @Override
-    public String deleteAlerta(Integer id) {
+    public String deleteAlert(Integer id) {
         try{
             alertRepository.deleteById(id);
             return "Deleted";

@@ -27,28 +27,28 @@ public class RequisitionService implements IRequisition {
     }
 
     @Override
-    public List<RequisitionEntity> getAllSolicitudes() {
+    public List<RequisitionEntity> getAllRequisitions() {
         return requisitionRepository.findAll();
     }
 
     @Override
-    public RequisitionEntity getSolicitudById(Integer id) {
+    public RequisitionEntity getRequisitionById(Integer id) {
         return requisitionRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Boolean createSolicitud(RequisitionEntity solicitud) {
-        RequisitionEntity solicitudCompleta = getSolicitudById(solicitud.getId());
-        return aprobarSolicitud(solicitudCompleta);
+    public Boolean createRequisition(RequisitionEntity solicitud) {
+        RequisitionEntity solicitudCompleta = getRequisitionById(solicitud.getId());
+        return checkRequisition(solicitudCompleta);
     }
 
     @Override
-    public RequisitionEntity updateSolicitud(RequisitionEntity solicitud) {
+    public RequisitionEntity updateRequisition(RequisitionEntity solicitud) {
         return requisitionRepository.save(solicitud);
     }
 
     @Override
-    public String deleteSolicitud(Integer id) {
+    public String deleteRequisition(Integer id) {
         try{
             requisitionRepository.deleteById(id);
             return "Deleted";
@@ -57,30 +57,30 @@ public class RequisitionService implements IRequisition {
         }
     }
 
-    public Optional<List<RequisitionEntity>> getSolicitudesByEmpleadoId(Integer empleadoId) {
+    public Optional<List<RequisitionEntity>> getRequisitionByEmployeeId(Integer empleadoId) {
         UserEntity usuario = userService.getUsuarioByEmpleadoId(empleadoId);
         List<RequisitionEntity> solicitudes = requisitionRepository.findByUsuarioOrderByFechaCreacionDesc(usuario);
         return Optional.ofNullable(solicitudes.isEmpty() ? null : solicitudes);
     }
 
-    public boolean aprobarSolicitud(RequisitionEntity solicitud) {
+    public boolean checkRequisition(RequisitionEntity solicitud) {
         UserEntity usuario = userService.getUsuarioById(solicitud.getId());
         EmployeeEntity empleado = usuario.getEmpleado();
         String tipoContrato = empleado.getTipoContrato();
 
         Date fechaIngreso = empleado.getFechaIngreso();
         LocalDate fechaIngresoLocalDate = fechaIngreso.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        int diasTrabajados = calcularDiasHabiles(fechaIngresoLocalDate, LocalDate.now());
+        int diasTrabajados = calculateBusinessDay(fechaIngresoLocalDate, LocalDate.now());
         double anosTrabajados = (double) diasTrabajados / 365;
         int diasVacaciones = (int) Math.round(anosTrabajados * 15);
-        int diasAnticipacion = calcularDiasHabiles(LocalDate.now(), solicitud.getFechaInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+        int diasAnticipacion = calculateBusinessDay(LocalDate.now(), solicitud.getFechaInicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
         boolean isDateValid = solicitud.getFechaInicio().after(solicitud.getFechaCreacion()) && solicitud.getFechaInicio().before(solicitud.getFechaFin());
         return !tipoContrato.equals("prestacion de servicios")
         && solicitud.getDiasSolicitados() <= diasVacaciones
         && diasAnticipacion >= 15 && diasTrabajados >= 60 && isDateValid;
     }
 
-    public int calcularDiasHabiles(LocalDate fechaInicio, LocalDate fechaFin) {
+    public int calculateBusinessDay(LocalDate fechaInicio, LocalDate fechaFin) {
         int diasHabiles = 0;
         while (fechaInicio.isBefore(fechaFin) || fechaInicio.isEqual(fechaFin)) {
             switch (fechaInicio.getDayOfWeek()) {

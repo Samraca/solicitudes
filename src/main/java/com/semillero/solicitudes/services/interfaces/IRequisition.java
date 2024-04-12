@@ -5,11 +5,11 @@ import com.semillero.solicitudes.persistence.entities.RequisitionEntity;
 import java.util.List;
 
 public interface IRequisition {
-    List<RequisitionEntity> getAllSolicitudes();
-    RequisitionEntity getSolicitudById(Integer id);
-    Boolean createSolicitud(RequisitionEntity solicitud);
-    RequisitionEntity updateSolicitud(RequisitionEntity solicitud);
-    String deleteSolicitud(Integer id);
+    List<RequisitionEntity> getAllRequisitions();
+    RequisitionEntity getRequisitionById(Integer id);
+    Boolean createRequisition(RequisitionEntity solicitud);
+    RequisitionEntity updateRequisition(RequisitionEntity solicitud);
+    String deleteRequisition(Integer id);
 
 
 }

@@ -24,6 +24,6 @@ public class AlertController {
 
     @RequestMapping("/getAll")
     public ResponseEntity<List<AlertEntity>> getAllAlertas(){
-        return ResponseEntity.ok(alertService.getAllAlertas());
+        return ResponseEntity.ok(alertService.getAllAlerts());
     }
 }

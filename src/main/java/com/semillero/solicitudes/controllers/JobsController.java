@@ -22,6 +22,6 @@ public class JobsController {
 
     @RequestMapping("/getAll")
     public ResponseEntity<List<JobsEntity>> getAllCargos(){
-        return ResponseEntity.ok(jobsService.getAllCargos());
+        return ResponseEntity.ok(jobsService.getAllJobs());
     }
 }

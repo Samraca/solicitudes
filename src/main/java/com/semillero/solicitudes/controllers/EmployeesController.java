@@ -28,12 +28,12 @@ public class EmployeesController {
 
     @RequestMapping("/getAll")
     public ResponseEntity<List<EmployeeEntity>> getAllEmpleados(){
-        return ResponseEntity.ok(employeeService.getAllEmpleados());
+        return ResponseEntity.ok(employeeService.getAllEmployees());
     }
 
     @RequestMapping("/getById")
     public ResponseEntity<?> getEmpleadoById(@RequestParam Integer id){
-        EmployeeEntity empleado = employeeService.getEmpleadoById(id);
+        EmployeeEntity empleado = employeeService.getEmployeeById(id);
         if (empleado == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Empleado no encontrado con id: " + id);
         }
@@ -43,30 +43,30 @@ public class EmployeesController {
     @PostMapping("/create")
     public EmployeeEntity createEmpleado(@RequestBody EmployeesDTO empleadoDTO){
         EmployeeEntity empleado = convertEmpleadosDtoToEmpleadosEntity(empleadoDTO);
-        EmployeeEntity existingEmpleado = employeeService.findByDocumento(empleadoDTO.getDocumento());
+        EmployeeEntity existingEmpleado = employeeService.findByDocument(empleadoDTO.getDocumento());
         if (existingEmpleado != null) {
             throw new IllegalArgumentException("Ya existe un empleado con el documento: " + empleado.getDocumento());
         }
-        return employeeService.createEmpleado(empleado);
+        return employeeService.createEmployee(empleado);
     }
 
     @PutMapping("/update")
     public ResponseEntity<EmployeeEntity> updateEmpleado(@RequestBody EmployeesDTO empleadoDTO){
         EmployeeEntity empleado = convertEmpleadosDtoToEmpleadosEntity(empleadoDTO);
-        EmployeeEntity existingEmpleado = employeeService.getEmpleadoById(empleado.getId());
+        EmployeeEntity existingEmpleado = employeeService.getEmployeeById(empleado.getId());
         if (existingEmpleado == null) {
             throw new EntityNotFoundException("Empleado no encontrado con id: " + empleado.getId());
         }
-        return ResponseEntity.ok(employeeService.updateEmpleado(empleado));
+        return ResponseEntity.ok(employeeService.updateEmployee(empleado));
     }
 
     @RequestMapping("/delete")
     public void deleteEmpleado(@RequestParam Integer id){
-        EmployeeEntity existingEmpleado = employeeService.getEmpleadoById(id);
+        EmployeeEntity existingEmpleado = employeeService.getEmployeeById(id);
         if (existingEmpleado == null) {
             throw new EntityNotFoundException("Empleado no encontrado con id: " + id);
         }
-        employeeService.deleteEmpleado(id);
+        employeeService.deleteEmployee(id);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
@@ -92,9 +92,9 @@ public class EmployeesController {
     empleado.setFechaRetiro(empleadoDto.getFechaRetiro());
     empleado.setTipoContrato(empleadoDto.getTipoContrato());
     empleado.setEstado(empleadoDto.getEstado());
-    empleado.setSupervisor(employeeService.getEmpleadoById(empleadoDto.getSupervisor()));
+    empleado.setSupervisor(employeeService.getEmployeeById(empleadoDto.getSupervisor()));
     JobsDTO cargo = empleadoDto.getCargo();
-    empleado.setCargo(jobsService.getCargoById(cargo.getId()));
+    empleado.setCargo(jobsService.getJobById(cargo.getId()));
     return empleado;
 }
 }

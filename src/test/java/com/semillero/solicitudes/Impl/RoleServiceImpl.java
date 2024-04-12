@@ -37,7 +37,7 @@ class RoleServiceImpl {
     @DisplayName("search role by id returns an role or null")
     @Test
     void givenIdForRoleSearchExpectRoleOrNull(){
-        Assertions.assertTrue(roleService.getRolById(Mockito.anyInt())!= null || roleService.getRolById(Mockito.anyInt())==null);
+        Assertions.assertTrue(roleService.getRoleById(Mockito.anyInt())!= null || roleService.getRoleById(Mockito.anyInt())==null);
     }
 
     @DisplayName("create role returns expected role")
@@ -46,7 +46,7 @@ class RoleServiceImpl {
         RoleEntity expectedRole = new RoleEntity();
         when(roleRepository.save(expectedRole)).thenReturn(expectedRole);
 
-        final RoleEntity result = roleService.createRol(expectedRole);
+        final RoleEntity result = roleService.createRole(expectedRole);
 
         Assertions.assertEquals(expectedRole, result);
     }
@@ -57,7 +57,7 @@ class RoleServiceImpl {
         RoleEntity expectedRoleToUpdate = new RoleEntity();
         when(roleRepository.save(expectedRoleToUpdate)).thenReturn(expectedRoleToUpdate);
 
-        final RoleEntity result = roleService.updateRol(expectedRoleToUpdate);
+        final RoleEntity result = roleService.updateRole(expectedRoleToUpdate);
 
         Assertions.assertEquals(expectedRoleToUpdate, result);
     }
@@ -65,6 +65,6 @@ class RoleServiceImpl {
     @DisplayName("delete role returns deleted")
     @Test
     void givenIdOfAlertToDeleteExpectDeleted(){
-        Assertions.assertEquals("Deleted", roleService.deleteRol(Mockito.anyInt()));
+        Assertions.assertEquals("Deleted", roleService.deleteRole(Mockito.anyInt()));
     }
 }

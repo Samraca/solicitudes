@@ -24,22 +24,22 @@ public class RoleService implements IRole {
     }
 
     @Override
-    public RoleEntity getRolById(Integer id) {
+    public RoleEntity getRoleById(Integer id) {
         return roleRepository.findById(id).orElse(null);
     }
 
     @Override
-    public RoleEntity createRol(RoleEntity rol) {
+    public RoleEntity createRole(RoleEntity rol) {
         return roleRepository.save(rol);
     }
 
     @Override
-    public RoleEntity updateRol(RoleEntity rol) {
+    public RoleEntity updateRole(RoleEntity rol) {
         return roleRepository.save(rol);
     }
 
     @Override
-    public String deleteRol(Integer id) {
+    public String deleteRole(Integer id) {
         try{
             roleRepository.deleteById(id);
             return "Deleted";

@@ -5,14 +5,14 @@ import com.semillero.solicitudes.persistence.entities.AlertEntity;
 import java.util.List;
 
 public interface IAlert {
-    List<AlertEntity> getAllAlertas();
+    List<AlertEntity> getAllAlerts();
 
-    AlertEntity getAlertaById(Integer id);
+    AlertEntity getAlertsById(Integer id);
 
-    AlertEntity createAlerta(AlertEntity alerta);
+    AlertEntity createAlert(AlertEntity alerta);
 
-    AlertEntity updateAlerta(AlertEntity alerta);
+    AlertEntity updateAlert(AlertEntity alerta);
 
-    String deleteAlerta(Integer id);
+    String deleteAlert(Integer id);
 
 }

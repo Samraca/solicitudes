@@ -19,34 +19,32 @@ public class JobsService implements IJobs {
     }
 
     @Override
-    public List<JobsEntity> getAllCargos() {
+    public List<JobsEntity> getAllJobs() {
         return jobsRepository.findAll();
     }
 
     @Override
-    public JobsEntity getCargoById(Integer id) {
+    public JobsEntity getJobById(Integer id) {
         return jobsRepository.findById(id).orElse(null);
     }
 
     @Override
-    public JobsEntity createCargo(JobsEntity cargo) {
+    public JobsEntity createJob(JobsEntity cargo) {
         return jobsRepository.save(cargo);
     }
 
     @Override
-    public JobsEntity updateCargo(JobsEntity cargo) {
+    public JobsEntity updateJob(JobsEntity cargo) {
         return jobsRepository.save(cargo);
     }
 
     @Override
-    public String deleteCargo(Integer id) {
+    public String deleteJob(Integer id) {
         try {
             jobsRepository.deleteById(id);
             return "Deleted";
         } catch (Exception exception){
             return ""+exception;
         }
-
     }
-
 }

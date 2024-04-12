@@ -18,27 +18,27 @@ public class EmployeeService implements IEmployee {
     }
 
     @Override
-    public List<EmployeeEntity> getAllEmpleados() {
+    public List<EmployeeEntity> getAllEmployees() {
         return employeesRepository.findAll();
     }
 
     @Override
-    public EmployeeEntity getEmpleadoById(Integer id) {
+    public EmployeeEntity getEmployeeById(Integer id) {
         return employeesRepository.findById(id).orElse(null);
     }
 
     @Override
-    public EmployeeEntity createEmpleado(EmployeeEntity empleado) {
+    public EmployeeEntity createEmployee(EmployeeEntity empleado) {
         return employeesRepository.save(empleado);
     }
 
     @Override
-    public EmployeeEntity updateEmpleado(EmployeeEntity empleado) {
+    public EmployeeEntity updateEmployee(EmployeeEntity empleado) {
         return employeesRepository.save(empleado);
     }
 
     @Override
-    public String deleteEmpleado(Integer id) {
+    public String deleteEmployee(Integer id) {
         try{
             employeesRepository.deleteById(id);
             return "Deleted";
@@ -47,7 +47,7 @@ public class EmployeeService implements IEmployee {
         }
     }
 
-    public EmployeeEntity findByDocumento(int documento) {
+    public EmployeeEntity findByDocument(int documento) {
         return employeesRepository.findByDocumento(documento);
     }
 }

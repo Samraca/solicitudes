@@ -31,13 +31,13 @@ class AlertServiceImpl {
     @DisplayName("alerts list could be empty but not null")
     @Test
     void listOfAlertsIsNotNull(){
-        Assertions.assertNotNull(alertService.getAllAlertas());
+        Assertions.assertNotNull(alertService.getAllAlerts());
     }
 
     @DisplayName("search alert by id returns an alert or null")
     @Test
     void givenIdForAlertSearchExpectAlertOrNull(){
-        Assertions.assertTrue(alertService.getAlertaById(Mockito.anyInt())!= null || alertService.getAlertaById(Mockito.anyInt())==null);
+        Assertions.assertTrue(alertService.getAlertsById(Mockito.anyInt())!= null || alertService.getAlertsById(Mockito.anyInt())==null);
     }
 
     @DisplayName("create alert returns expected alert")
@@ -46,7 +46,7 @@ class AlertServiceImpl {
         AlertEntity expectedAlert = new AlertEntity();
         when(alertRepository.save(expectedAlert)).thenReturn(expectedAlert);
 
-        final AlertEntity result = alertService.createAlerta(expectedAlert);
+        final AlertEntity result = alertService.createAlert(expectedAlert);
 
         Assertions.assertEquals(expectedAlert, result);
     }
@@ -57,7 +57,7 @@ class AlertServiceImpl {
         AlertEntity expectedAlertToUpdate = new AlertEntity();
         when(alertRepository.save(expectedAlertToUpdate)).thenReturn(expectedAlertToUpdate);
 
-        final AlertEntity result = alertService.updateAlerta(expectedAlertToUpdate);
+        final AlertEntity result = alertService.updateAlert(expectedAlertToUpdate);
 
         Assertions.assertEquals(expectedAlertToUpdate, result);
     }
@@ -65,7 +65,7 @@ class AlertServiceImpl {
     @DisplayName("delete alert returns deleted")
     @Test
     void givenIdOfAlertToDeleteExpectDeleted(){
-        Assertions.assertEquals("Deleted", alertService.deleteAlerta(Mockito.anyInt()));
+        Assertions.assertEquals("Deleted", alertService.deleteAlert(Mockito.anyInt()));
     }
 
 

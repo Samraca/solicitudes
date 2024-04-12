@@ -7,11 +7,11 @@ import java.util.List;
 public interface IRole {
     List<RoleEntity> getAllRoles();
 
-    RoleEntity getRolById(Integer id);
+    RoleEntity getRoleById(Integer id);
 
-    RoleEntity createRol(RoleEntity rol);
+    RoleEntity createRole(RoleEntity rol);
 
-    RoleEntity updateRol(RoleEntity rol);
+    RoleEntity updateRole(RoleEntity rol);
 
-    String deleteRol(Integer id);
+    String deleteRole(Integer id);
 }
