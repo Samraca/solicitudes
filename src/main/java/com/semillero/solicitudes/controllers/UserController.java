@@ -26,14 +26,4 @@ public class UserController {
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
-
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        UserEntity usuario = userService.findByUsername(loginRequest.getUsername());
-        if (usuario != null && usuario.getPassword().equals(loginRequest.getPassword())) {
-            return ResponseEntity.ok("Usuario autenticado correctamente");
-        } else {
-            return ResponseEntity.status(401).body("Usuario o contraseña incorrectos");
-        }
-    }
 }

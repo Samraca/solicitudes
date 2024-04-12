@@ -1,4 +1,4 @@
-package com.semillero.solicitudes.Impl;
+package com.semillero.solicitudes.Implementation;
 
 import com.semillero.solicitudes.persistence.AlertRepository;
 import com.semillero.solicitudes.persistence.entities.AlertEntity;

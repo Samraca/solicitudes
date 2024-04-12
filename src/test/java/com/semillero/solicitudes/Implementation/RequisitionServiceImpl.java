@@ -1,4 +1,4 @@
-package com.semillero.solicitudes.Impl;
+package com.semillero.solicitudes.Implementation;
 
 import com.semillero.solicitudes.persistence.RequisitionRepository;
 import com.semillero.solicitudes.persistence.UserRepository;
