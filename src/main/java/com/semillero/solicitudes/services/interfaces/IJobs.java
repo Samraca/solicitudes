@@ -13,5 +13,5 @@ public interface IJobs {
 
     JobsEntity updateCargo(JobsEntity cargo);
 
-    void deleteCargo(Integer id);
+    String deleteCargo(Integer id);
 }

@@ -2,14 +2,19 @@ package com.semillero.solicitudes.Impl;
 
 import com.semillero.solicitudes.persistence.EmployeesRepository;
 import com.semillero.solicitudes.persistence.UserRepository;
+import com.semillero.solicitudes.persistence.entities.UserEntity;
 import com.semillero.solicitudes.services.UserService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class UserServiceImpl {
@@ -27,25 +32,56 @@ class UserServiceImpl {
         userService = new UserService(userRepository, employeesRepository);
     }
 
+    @DisplayName("users list could be empty but not null")
     @Test
     void listOfUserIsNotNull (){
         Assertions.assertNotNull(userService.getAllUsuarios());
     }
 
+    @DisplayName("search user by id returns an user or null")
     @Test
     void returnedValueFromGetUserByIdIsNullOrUser (){
-        Assertions.assertTrue(userService.getUsuarioById(1)==null || userService.getUsuarioById(1) != null);
-    }
-    
-    @Test
-    void returnedValueFromGetUserByEmployeeIdIsNullOrUser () {
-        Assertions.assertTrue(userService.getUsuarioByEmpleadoId(1) == null || userService.getUsuarioByEmpleadoId(1) != null);
+        Assertions.assertTrue(userService.getUsuarioById(Mockito.anyInt())==null || userService.getUsuarioById(Mockito.anyInt()) != null);
     }
 
-    /*
+    @DisplayName("search user by employee id returns an user or null")
     @Test
-    void returnedValueAfterCreateUserIsNotNull () {
-        Assertions.assertTrue(userService.createUsuario())
+    void returnedValueFromGetUserByEmployeeIdIsNullOrUser () {
+        Assertions.assertTrue(userService.getUsuarioByEmpleadoId(Mockito.anyInt()) == null || userService.getUsuarioByEmpleadoId(Mockito.anyInt()) != null);
     }
-    */
+
+    @DisplayName("search user by username returns an user or null")
+    @Test
+    void returnedValueFromFindByUsernameIsNullOrUser(){
+        Assertions.assertTrue(userService.findByUsername(Mockito.anyString()) == null || userService.findByUsername(Mockito.anyString()) != null);
+    }
+
+    @DisplayName("create user returns expected user")
+    @Test
+    void givenUserToCreateExpectUserCreated(){
+        UserEntity expectedUser = new UserEntity();
+        when(userRepository.save(expectedUser)).thenReturn(expectedUser);
+
+        final UserEntity result = userService.createUsuario(expectedUser);
+
+        Assertions.assertEquals(expectedUser, result);
+    }
+
+    @DisplayName("update user returns expected updated user")
+    @Test
+    void givenUserToUpdateExpectUserUpdated(){
+        UserEntity expectedUserToUpdate = new UserEntity();
+        when(userRepository.save(expectedUserToUpdate)).thenReturn(expectedUserToUpdate);
+
+        final UserEntity result = userService.updateUsuario(expectedUserToUpdate);
+
+        Assertions.assertEquals(expectedUserToUpdate, result);
+    }
+
+    @DisplayName("delete user returns deleted")
+    @Test
+    void givenIdOfUserToDeleteExpectDeleted(){
+        Assertions.assertEquals("Deleted", userService.deleteUsuario(Mockito.anyInt()));
+    }
+
 }

@@ -39,7 +39,12 @@ public class RoleService implements IRole {
     }
 
     @Override
-    public void deleteRol(Integer id) {
-        roleRepository.deleteById(id);
+    public String deleteRol(Integer id) {
+        try{
+            roleRepository.deleteById(id);
+            return "Deleted";
+        }catch(Exception exception){
+            return "Error: "+exception;
+        }
     }
 }

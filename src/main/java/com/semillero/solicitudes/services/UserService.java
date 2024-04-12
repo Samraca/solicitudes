@@ -47,8 +47,13 @@ public class UserService implements IUser {
     }
 
     @Override
-    public void deleteUsuario(Integer id) {
-        userRepository.deleteById(id);
+    public String deleteUsuario(Integer id) {
+        try{
+            userRepository.deleteById(id);
+            return "Deleted";
+        }catch(Exception exception){
+            return "Error: "+exception;
+        }
     }
 
     public UserEntity findByUsername(String username) {

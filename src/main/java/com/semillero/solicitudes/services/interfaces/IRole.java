@@ -13,5 +13,5 @@ public interface IRole {
 
     RoleEntity updateRol(RoleEntity rol);
 
-    void deleteRol(Integer id);
+    String deleteRol(Integer id);
 }

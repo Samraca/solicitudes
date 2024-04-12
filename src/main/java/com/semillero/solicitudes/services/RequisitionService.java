@@ -19,7 +19,6 @@ import java.time.ZoneId;
 @Service
 public class RequisitionService implements IRequisition {
     RequisitionRepository requisitionRepository;
-    @Autowired
     private UserService userService;
 
     @Autowired
@@ -49,8 +48,13 @@ public class RequisitionService implements IRequisition {
     }
 
     @Override
-    public void deleteSolicitud(Integer id) {
-        requisitionRepository.deleteById(id);
+    public String deleteSolicitud(Integer id) {
+        try{
+            requisitionRepository.deleteById(id);
+            return "Deleted";
+        }catch(Exception exception){
+            return "Error: "+exception;
+        }
     }
 
     public Optional<List<RequisitionEntity>> getSolicitudesByEmpleadoId(Integer empleadoId) {

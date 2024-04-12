@@ -13,6 +13,6 @@ public interface IAlert {
 
     AlertEntity updateAlerta(AlertEntity alerta);
 
-    void deleteAlerta(Integer id);
+    String deleteAlerta(Integer id);
 
 }

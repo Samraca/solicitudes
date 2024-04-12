@@ -39,8 +39,14 @@ public class JobsService implements IJobs {
     }
 
     @Override
-    public void deleteCargo(Integer id) {
-        jobsRepository.deleteById(id);
+    public String deleteCargo(Integer id) {
+        try {
+            jobsRepository.deleteById(id);
+            return "Deleted";
+        } catch (Exception exception){
+            return ""+exception;
+        }
+
     }
 
 }

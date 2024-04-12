@@ -38,8 +38,13 @@ public class EmployeeService implements IEmployee {
     }
 
     @Override
-    public void deleteEmpleado(Integer id) {
-        employeesRepository.deleteById(id);
+    public String deleteEmpleado(Integer id) {
+        try{
+            employeesRepository.deleteById(id);
+            return "Deleted";
+        }catch(Exception exception){
+            return "Error: "+exception;
+        }
     }
 
     public EmployeeEntity findByDocumento(int documento) {

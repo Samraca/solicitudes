@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AlertService implements IAlert {
@@ -38,8 +39,14 @@ public class AlertService implements IAlert {
     }
 
     @Override
-    public void deleteAlerta(Integer id) {
-        alertRepository.deleteById(id);
+    public String deleteAlerta(Integer id) {
+        try{
+            alertRepository.deleteById(id);
+            return "Deleted";
+        }catch(Exception exception){
+            return "Error: "+exception;
+        }
+
     }
 
 }

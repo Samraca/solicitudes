@@ -13,5 +13,5 @@ public interface IUser {
 
     UserEntity updateUsuario(UserEntity usuario);
 
-    void deleteUsuario(Integer id);
+    String deleteUsuario(Integer id);
 }

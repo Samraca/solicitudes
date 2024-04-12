@@ -9,5 +9,5 @@ public interface IEmployee {
     EmployeeEntity getEmpleadoById(Integer id);
     EmployeeEntity createEmpleado(EmployeeEntity empleado);
     EmployeeEntity updateEmpleado(EmployeeEntity empleado);
-    void deleteEmpleado(Integer id);
+    String deleteEmpleado(Integer id);
 }

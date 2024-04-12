@@ -9,7 +9,7 @@ public interface IRequisition {
     RequisitionEntity getSolicitudById(Integer id);
     Boolean createSolicitud(RequisitionEntity solicitud);
     RequisitionEntity updateSolicitud(RequisitionEntity solicitud);
-    void deleteSolicitud(Integer id);
+    String deleteSolicitud(Integer id);
 
 
 }
