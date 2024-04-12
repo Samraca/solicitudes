@@ -61,6 +61,7 @@ public class EmployeesController {
     }
 
     @RequestMapping("/delete")
+    @ResponseStatus(HttpStatus.OK)
     public void deleteEmpleado(@RequestParam Integer id){
         EmployeeEntity existingEmpleado = employeeService.getEmployeeById(id);
         if (existingEmpleado == null) {
